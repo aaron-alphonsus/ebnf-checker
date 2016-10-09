@@ -21,17 +21,24 @@ public class BnfChecker {
     
     public BnfCheckerResult checkExpression(String expr)
     {
-        int tokensUsed;
+        String bestMatch = "No Rule";
+        int bestChars = 0;
+        int charsUsed;
         ArrayList<String> tokens = tokenize(expr);
         for(String s : _rules.keySet())
         {
-            tokensUsed = _rules.get(s).validTokens(tokens, 0, _rules);
-            System.out.println("Used " + tokensUsed + " tokens for rule " + s);
+            charsUsed = _rules.get(s).validTokens(expr, 0, _rules);
+            if(charsUsed > bestChars)
+            {
+                bestChars = charsUsed;
+                bestMatch = s;
+            }
+            
             //If any rule uses all tokens, then it is valid
-            if(tokensUsed == tokens.size())
-                return new BnfCheckerResult(true, tokens);
+            if(bestChars == expr.length())
+                return new BnfCheckerResult(bestChars, bestMatch, tokens);
         }
-        return new BnfCheckerResult(false, tokens);
+        return new BnfCheckerResult(bestChars, bestMatch, tokens);
     }
     
     public void addRule(BnfRule rule)
@@ -41,12 +48,6 @@ public class BnfChecker {
     
     private ArrayList<String> tokenize(String expr)
     {
-        ArrayList<String> tokens = new ArrayList<String>();
-        for(Character c : expr.toCharArray())
-        {
-            if(c != ' ')
-                tokens.add(c.toString());
-        }
-        return tokens;
+        return new ArrayList<String>();
     }
 }

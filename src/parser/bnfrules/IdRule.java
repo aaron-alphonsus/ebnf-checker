@@ -19,15 +19,15 @@ public class IdRule extends BnfRule {
         return "id";
     }
 
-    public int validTokens(ArrayList<String> tokens, int index, HashMap<String, BnfRule> rules) {
+    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         int subIndex = 0;
         int addition = 0;
-        addition = rules.get("letter").validTokens(tokens, index, rules);
+        addition = rules.get("letter").validTokens(expr, index, rules);
         while(addition > 0)
         {
             subIndex += addition;
-            addition = Math.max(rules.get("letter").validTokens(tokens, index+subIndex, rules),
-                                rules.get("digit").validTokens(tokens, index+subIndex, rules));
+            addition = Math.max(rules.get("letter").validTokens(expr, index+subIndex, rules),
+                                rules.get("digit").validTokens(expr, index+subIndex, rules));
         }
         return subIndex;
     }

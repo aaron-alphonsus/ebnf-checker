@@ -12,11 +12,13 @@ import java.util.ArrayList;
  * @author 7280681
  */
 public class BnfCheckerResult {
-    private boolean _valid;
+    private int _chars;
+    private String _name;
     private ArrayList<String> _tokens;
-    public BnfCheckerResult(boolean valid, ArrayList<String> tokens)
+    public BnfCheckerResult(int chars, String name, ArrayList<String> tokens)
     {
-        _valid = valid;
+        _chars = chars;
+        _name = name;
         _tokens = tokens;
     }
     
@@ -25,8 +27,13 @@ public class BnfCheckerResult {
         return _tokens;
     }
     
-    public boolean valid()
+    public int chars()
     {
-        return _valid;
+        return _chars;
+    }
+    
+    public String name()
+    {
+        return _name;
     }
 }

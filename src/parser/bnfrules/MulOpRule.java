@@ -18,8 +18,13 @@ public class MulOpRule extends BnfRule {
         return "mulop";
     }
 
-    public int validTokens(ArrayList<String> tokens, int index, HashMap<String, BnfRule> rules) {
-        if(index >= tokens.size() || tokens.get(index).equals("*")) return 1;
+    public int validTokens(String tokens, int index, HashMap<String, BnfRule> rules) {
+        if(index >= tokens.length()) return 0;
+        
+        if(tokens.charAt(index) == '*' ||
+           tokens.charAt(index) == '/' ||
+           tokens.charAt(index) == '%') return 1;
+        
         return 0;
     }
     

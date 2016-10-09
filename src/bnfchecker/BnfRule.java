@@ -27,5 +27,5 @@ public abstract class BnfRule {
     * If so, returns how many tokens are used to do this rule
     * Otherwise returns 0
     */
-    public abstract int validTokens(ArrayList<String> tokens, int index, HashMap<String, BnfRule> rules);
+    public abstract int validTokens(String expr, int index, HashMap<String, BnfRule> rules);
 }

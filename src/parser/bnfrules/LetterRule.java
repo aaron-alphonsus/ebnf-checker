@@ -19,12 +19,12 @@ public class LetterRule extends BnfRule {
         return "letter";
     }
 
-    public int validTokens(ArrayList<String> tokens, int index, HashMap<String, BnfRule> rules) {
+    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         //If first token > 1 characters, not a digit
-        if (index >= tokens.size() || tokens.get(index).length() > 1) return 0;
+        if (index >= expr.length()) return 0;
         
         //Get the character
-        char candidate = tokens.get(index).charAt(0);
+        char candidate = expr.charAt(index);
         
         //Check if the token character is a letter or _
         if(candidate >= 'a' && candidate <= 'z' ||

@@ -19,12 +19,12 @@ public class DigitRule extends BnfRule {
         return "digit";
     }
 
-    public int validTokens(ArrayList<String> tokens, int index, HashMap<String, BnfRule> rules) {
+    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         //If first token > 1 characters, not a digit
-        if (tokens.size() >= 0 || tokens.get(index).length() > 1) return 0;
+        if (index >= expr.length()) return 0;
         
         //Get the character
-        char candidate = tokens.get(index).charAt(0);
+        char candidate = expr.charAt(index);
         
         //Check if the token character is between '0' and '9'
         if(candidate >= '0' && candidate <= '9') return 1;

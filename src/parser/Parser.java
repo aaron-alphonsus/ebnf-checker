@@ -22,10 +22,24 @@ public class Parser {
         Scanner cin = new Scanner( System.in );
         String input;
         BnfChecker checker = setupChecker();
-        boolean tFlag = false;
+        boolean tFlag = false, bFlag = false;
+        String ruleFile = "";
         
-        if(args.length > 0 && args[0].toLowerCase().equals("-t"))
-            tFlag = true;
+        for(String s : args)
+        {
+            if(s.charAt(0) == '-')
+            {
+                if(s.length() > 1)
+                {
+                    if(s.charAt(1) == 't') tFlag = true;
+                    if(s.charAt(1) == 'b') bFlag = true;
+                }
+            }
+            else
+            {
+                ruleFile = s;
+            }
+        }
         
         cin.useDelimiter("\n");
         do
@@ -45,10 +59,17 @@ public class Parser {
                 }
                 System.out.print("\n");
             }
-            if(result.valid())
+            if(result.chars() == input.length())
                 System.out.println("Valid Expression");
             else
                 System.out.println("Invalid Expression");
+            
+            if(bFlag)
+            {
+                System.out.println("Best Match: " + result.name());
+                if(result.chars() != input.length())
+                    System.out.println(result.chars() + " characters used");
+            }
         }while(true);
     }
     
