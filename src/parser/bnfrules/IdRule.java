@@ -22,7 +22,10 @@ public class IdRule extends BnfRule {
     public int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         int subIndex = 0;
         int addition = 0;
-        addition = rules.get("letter").validTokens(expr, index, rules);
+        //Skip leading whitespace
+        while(expr.charAt(index+subIndex) == ' ')subIndex++;
+        
+        addition = rules.get("letter").validTokens(expr, index+subIndex, rules);
         while(addition > 0)
         {
             subIndex += addition;
