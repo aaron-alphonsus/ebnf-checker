@@ -6,7 +6,6 @@
 package parser.bnfrules;
 
 import bnfchecker.BnfRule;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

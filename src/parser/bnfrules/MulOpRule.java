@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package parser.bnfrules;
-import bnfchecker.*;
-import java.util.ArrayList;
+import bnfchecker.BnfRule;
 import java.util.HashMap;
 
 /**

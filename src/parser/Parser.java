@@ -5,8 +5,9 @@
  */
 package parser;
 
+import bnfchecker.BnfCheckerResult;
+import bnfchecker.BnfChecker;
 import java.util.Scanner;
-import bnfchecker.*;
 import parser.bnfrules.*;
 
 /**
@@ -41,11 +42,10 @@ public class Parser {
             }
         }
         
-        cin.useDelimiter("\n");
         do
         {
             System.out.print("Enter Expression: ");
-            input = cin.next();
+            input = cin.nextLine();
             if(input.trim().length() == 0)
                 return;
             
@@ -60,9 +60,9 @@ public class Parser {
                 System.out.print("\n");
             }
             if(result.chars() == input.length())
-                System.out.println("Valid Expression");
+                System.out.println("\"" + input + "\" is a valid expression");
             else
-                System.out.println("Invalid Expression");
+                System.out.println("\"" + input + "\" is not a valid expression");
             
             if(bFlag)
             {

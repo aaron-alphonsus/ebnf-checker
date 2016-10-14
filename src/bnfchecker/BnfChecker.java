@@ -6,8 +6,6 @@
 package bnfchecker;
 
 import java.util.HashMap;
-import java.io.StreamTokenizer;
-import java.io.StringReader;
 import java.util.ArrayList;
 
 /**

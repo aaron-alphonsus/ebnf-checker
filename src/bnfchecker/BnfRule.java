@@ -6,7 +6,6 @@
 package bnfchecker;
 
 import java.util.HashMap;
-import java.util.ArrayList;
 
 /**
  *
