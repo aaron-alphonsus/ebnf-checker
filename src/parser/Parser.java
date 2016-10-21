@@ -24,7 +24,6 @@ public class Parser {
         String input;
         BnfChecker checker = setupChecker();
         boolean tFlag = false, bFlag = false;
-        String ruleFile = "";
         
         for(String s : args)
         {
@@ -36,10 +35,6 @@ public class Parser {
                     if(s.charAt(1) == 'b') bFlag = true;
                 }
             }
-            else
-            {
-                ruleFile = s;
-            }
         }
         
         do
@@ -50,19 +45,22 @@ public class Parser {
                 return;
             
             BnfCheckerResult result = checker.checkExpression(input);
+
+            if(result.chars() == input.length())
+                System.out.println("\"" + input + "\" is a valid expression");
+            else
+                System.out.println("\"" + input + "\" is not a valid expression");
+            
             if(tFlag)
             {
                 System.out.print("Tokens: ");
                 for(String s : result.tokens())
                 {
-                    System.out.print(s + " ");
+                    if(!s.equals(" "))
+                        System.out.print("\"" + s + "\""  + " ");
                 }
                 System.out.print("\n");
             }
-            if(result.chars() == input.length())
-                System.out.println("\"" + input + "\" is a valid expression");
-            else
-                System.out.println("\"" + input + "\" is not a valid expression");
             
             if(bFlag)
             {
