@@ -17,6 +17,7 @@ public class MulOpRule extends BnfRule {
         return "mulop";
     }
 
+    //<mulop> -> * | / | %
     public int validTokens(String tokens, int index, HashMap<String, BnfRule> rules) {
         if(index >= tokens.length()) return 0;
         

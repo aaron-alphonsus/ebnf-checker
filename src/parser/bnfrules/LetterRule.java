@@ -18,6 +18,10 @@ public class LetterRule extends BnfRule {
         return "letter";
     }
 
+/*<letter> -> A | B | C | D | E | F | G | H | I | J | K | L | M |
+              N | O | P | Q | R | S | T | U | V | W | X | Y | Z |
+              a | b | c | d | e | f | g | h | i | j | k | l | m |
+              n | o | p | q | r | s | t | u | v | w | x | y | z | _ */
     public int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         //If first token > 1 characters, not a digit
         if (index >= expr.length()) return 0;
