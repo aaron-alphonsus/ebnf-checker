@@ -3,6 +3,7 @@ package bnfchecker;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Object to hold and query {@link BnfRule} objects to
@@ -80,6 +81,25 @@ public class BnfChecker {
     */
     private ArrayList<String> tokenize(String expr)
     {
-        return new ArrayList<String>();
+        //Create list to return
+        ArrayList<String> tokens = new ArrayList<String>();
+        
+        //Create tokenizer to split on all operators, ., and ()
+        StringTokenizer tokfinder = new StringTokenizer(expr, "*/%+-. \t()", true);
+        
+        //Read as many tokens as can be found
+        String nextToken;
+        while(tokfinder.hasMoreTokens())
+        {
+            nextToken = tokfinder.nextToken();
+            
+            //Only keep tokens that are not whitespace
+            if(nextToken.trim().length() > 0)
+            {
+                tokens.add(nextToken);
+            }
+        }
+        
+        return tokens;
     }
 }

@@ -18,18 +18,25 @@ public class IdRule extends BnfRule {
         return "id";
     }
 
-    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
+    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
         int subIndex = 0;
         int addition = 0;
-        //Skip leading whitespace
-        while(expr.charAt(index+subIndex) == ' ')subIndex++;
         
-        addition = rules.get("letter").validTokens(expr, index+subIndex, rules);
+        BnfRule letter = rules.get("letter");
+        BnfRule digit = rules.get("digit");
+        if(letter == null || digit == null) return 0;
+        
+        //Skip leading whitespace
+        if(!keepWhitespace)
+            index = skipWhitespace(expr, index);
+        
+        addition = letter.validTokens(expr, index+subIndex, rules, true);
         while(addition > 0)
         {
             subIndex += addition;
-            addition = Math.max(rules.get("letter").validTokens(expr, index+subIndex, rules),
-                                rules.get("digit").validTokens(expr, index+subIndex, rules));
+            
+            addition = Math.max(letter.validTokens(expr, index+subIndex, rules, true),
+                                digit.validTokens(expr, index+subIndex, rules, true));
         }
         return subIndex;
     }

@@ -22,9 +22,13 @@ public class LetterRule extends BnfRule {
               N | O | P | Q | R | S | T | U | V | W | X | Y | Z |
               a | b | c | d | e | f | g | h | i | j | k | l | m |
               n | o | p | q | r | s | t | u | v | w | x | y | z | _ */
-    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
+    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
         //If first token > 1 characters, not a digit
         if (index >= expr.length()) return 0;
+        
+        //Skip leading whitespace
+        if(!keepWhitespace)
+            index = skipWhitespace(expr, index);
         
         //Get the character
         char candidate = expr.charAt(index);
