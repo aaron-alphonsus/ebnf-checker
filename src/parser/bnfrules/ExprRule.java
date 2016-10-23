@@ -12,7 +12,7 @@ import java.util.HashMap;
  *
  * @author 7280681
  */
-public class DigitRule extends BnfRule {
+public class ExprRule extends BnfRule {
     
     public String name() {
         return "expr";
