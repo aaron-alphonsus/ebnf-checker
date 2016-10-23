@@ -1,30 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bnfchecker;
 
 import java.util.HashMap;
 
 /**
- *
  * Class which checks uses recursive descent parsing
- * to see if a set of string tokens is a valid bnf sentence
+ * to see if a set of characters matches a bnf rule
+ *
+ * @author Andrew Stelter
  */
 public abstract class BnfRule {
     /**
-    *
     * Return the name of the rule to be used by other
     * rules to recurse to this rule
+    *
+    * @return A String, which is the name of the rule
     */
     public abstract String name();
     
     /**
+    * Checks how many characters of the string, starting at index,
+    * can be used to match this rule.
     *
-    * Checks if the tokens are a valid sentence of this rule
-    * If so, returns how many tokens are used to do this rule
-    * Otherwise returns 0
+    * @param expr The String expression to evaluate
+    * @param index The index of expr to start at, inclusive
+    * @param rules A hash of all available rules, hashed by their names
+    *
+    * @return The number of characters that this rule can use, starting at index.
+    *         0 if the rule can't be matched at all
     */
     public abstract int validTokens(String expr, int index, HashMap<String, BnfRule> rules);
 }
