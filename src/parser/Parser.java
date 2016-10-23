@@ -110,6 +110,7 @@ public class Parser {
         check.addRule(new IdRule());
         check.addRule(new LetterRule());
         check.addRule(new MulOpRule());
+        check.addRule(new AddOpRule());
         
         return check;
     }
