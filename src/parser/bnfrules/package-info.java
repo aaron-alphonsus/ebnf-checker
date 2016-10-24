@@ -1,5 +1,5 @@
 /**
- * Package containing all of the {@link BnfRule}
+ * Package containing all of the {@link bnfchecker.BnfRule}
  * objects used by the program to check
  * inputs
  *  

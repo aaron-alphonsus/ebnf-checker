@@ -12,19 +12,19 @@
  * <p>
  * The EBNF Rules used to determine validity of expressions follow:
  * <pre>
- * &ltexpr&gt    -&gt &ltterm&gt   { &ltaddop&gt &ltterm&gt }
- * &ltterm&gt    -&gt &ltfactor&gt { &ltmulop&gt &ltfactor&gt }
- * &ltfactor&gt  -&gt &ltinteger&gt | &ltfloat&gt | &ltid&gt | '('&ltexpr&gt ')'| [-] &ltfactor&gt
- * &ltinteger&gt -&gt &ltdigit&gt { &ltdigit&gt }
- * &ltfloat&gt   -&gt &ltinteger&gt . &ltinteger&gt
- * &ltid&gt      -&gt &ltletter&gt { &ltletter&gt | &ltdigit&gt }
- * &ltletter&gt  -&gt A | B | C | D | E | F | G | H | I | J | K | L | M |
+ * &lt;expr&gt;    -&gt; &lt;term&gt;   { &lt;addop&gt; &lt;term&gt; }
+ * &lt;term&gt;    -&gt; &lt;factor&gt; { &lt;mulop&gt; &lt;factor&gt; }
+ * &lt;factor&gt;  -&gt; &lt;integer&gt; | &lt;float&gt; | &lt;id&gt; | '('&lt;expr&gt; ')'| [-] &lt;factor&gt;
+ * &lt;integer&gt; -&gt; &lt;digit&gt; { &lt;digit&gt; }
+ * &lt;float&gt;   -&gt; &lt;integer&gt; . &lt;integer&gt;
+ * &lt;id&gt;      -&gt; &lt;letter&gt; { &lt;letter&gt; | &lt;digit&gt; }
+ * &lt;letter&gt;  -&gt; A | B | C | D | E | F | G | H | I | J | K | L | M |
  *              N | O | P | Q | R | S | T | U | V | W | X | Y | Z |
  *              a | b | c | d | e | f | g | h | i | j | k | l | m |
  *              n | o | p | q | r | s | t | u | v | w | x | y | z | _
- * &ltdigit&gt   -&gt 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
- * &ltaddop&gt   -&gt + | -
- * &ltmulop&gt   -&gt * | / | %
+ * &lt;digit&gt;   -&gt; 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+ * &lt;addop&gt;   -&gt; + | -
+ * &lt;mulop&gt;   -&gt; * | / | %
  * </pre>
  * Usage:
  * <pre>

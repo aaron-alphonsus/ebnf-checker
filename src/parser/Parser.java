@@ -96,11 +96,11 @@ public class Parser {
     
    /**
     * Function to create the {@link BnfChecker} object
-    * and insert all of the {@link BnfRule}s to be used
+    * and insert all of the {@link bnfchecker.BnfRule}s to be used
     * to check inputs
     *
     * @return A {@link BnfChecker} object loaded with all
-    * of the {@link BnfRule}s to use
+    * of the {@link bnfchecker.BnfRule}s to use
     */
     public static BnfChecker setupChecker()
     {
@@ -112,6 +112,8 @@ public class Parser {
         check.addRule(new DigitRule());
         check.addRule(new AddOpRule());
         check.addRule(new MulOpRule());
+        check.addRule(new ExprRule());
+        check.addRule(new TermRule());
         
         return check;
     }
