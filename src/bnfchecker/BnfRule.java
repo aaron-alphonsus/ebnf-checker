@@ -31,12 +31,34 @@ public abstract class BnfRule {
     *         0 if the rule can't be matched at all
     */
     protected abstract int validTokens(String expr, int index, HashMap<String, BnfRule> rules);
-       
+     
+    /**
+     * Convenience function to call charsUsed with the keepWhitespace param
+     * defaulted to false
+     * 
+     * @param expr The expression to evaluate
+     * @param index The index to start at
+     * @param rules The list of other rules to use
+     * @return The number of characters used for this rule; 0 if not valid with this rule
+     */
     public int charsUsed(String expr, int index, HashMap<String, BnfRule> rules)
     {
         return charsUsed(expr, index, rules, false);
     }
 
+     /**
+     * Function which optionally skips whitespace before calling the validTokens function
+     * to get the number of characters this rule can use in the input expression. If
+     * validTokens returns 0, then this function returns 0 regardless of the whitespace 
+     * skipped; however, if validTokens returns non-0, this this function adds whitespace
+     * skipped to that value before returning it
+     * 
+     * @param expr The expression to evaluate
+     * @param index The index to start at
+     * @param rules The list of other rules to use
+     * @param keepWhitespace Whether or not to avoid skipping whitespace before evaluating the rule
+     * @return The number of characters used for this rule, including whitespace; 0 if not valid with this rule
+     */
     public int charsUsed(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace)
     {
         int origIndex = index;
