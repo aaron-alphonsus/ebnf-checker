@@ -25,7 +25,10 @@ public class FloatRule extends BnfRule {
             if (addition > 0) {
                 subIndex += addition;
                 addition = integer.charsUsed(expr, index+subIndex, rules, true);
-				subIndex += addition;
+				if (addition > 0)
+					subIndex += addition;
+				else
+					return 0;
             }
         }
         
