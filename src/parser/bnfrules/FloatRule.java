@@ -24,10 +24,12 @@ public class FloatRule extends BnfRule {
         addition = integer.validTokens(expr, index+subIndex, rules, true);
         if (addition > 0) {
             subIndex += addition;
+			if(index+subIndex >= expr.length()) return 0;
             addition = ( (expr.charAt(index+subIndex) == '.')? 1 : 0 );
             if (addition > 0) {
                 subIndex += addition;
-                addition = integer.validTokens(expr, index+subIndex, rules, false);
+                addition = integer.validTokens(expr, index+subIndex, rules, true);
+				subIndex += addition;
             }
         }
         
