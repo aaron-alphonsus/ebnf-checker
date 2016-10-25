@@ -13,6 +13,7 @@ public class IntegerRule extends BnfRule {
         
         int subIndex = 0;
         int addition = 0;
+        int origIndex = index;
         
         BnfRule digit = rules.get("digit");	
         if (digit == null) return 0;    
@@ -21,13 +22,15 @@ public class IntegerRule extends BnfRule {
         if (!keepWhitespace)        
             index = skipWhitespace(expr, index);
         
+        int whitespace = index-origIndex;
+        
         addition = digit.validTokens(expr, index+subIndex, rules, true);
         while(addition > 0)
         {
             subIndex += addition;
             addition = digit.validTokens(expr, index+subIndex, rules, true);
         }
-        return subIndex;
+        return subIndex+(subIndex>0?whitespace:0);
     }
     
 }

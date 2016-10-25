@@ -57,10 +57,10 @@ public class Parser {
             System.out.print("Enter Expression: ");
             
             //Read a line
-            input = cin.nextLine();
+            input = cin.nextLine().trim();
             
             //If empty string, exit
-            if(input.trim().length() == 0)
+            if(input.length() == 0)
                 return;
             
             //Check the expression

@@ -23,20 +23,23 @@ public class LetterRule extends BnfRule {
               a | b | c | d | e | f | g | h | i | j | k | l | m |
               n | o | p | q | r | s | t | u | v | w | x | y | z | _ */
     public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
-        //If first token > 1 characters, not a digit
-        if (index >= expr.length()) return 0;
+        int origIndex = index;
         
         //Skip leading whitespace
         if(!keepWhitespace)
             index = skipWhitespace(expr, index);
         
+        int whitespace = index-origIndex;
+        
+        //If first token > 1 characters, not a digit
+        if (index >= expr.length()) return 0;
         //Get the character
         char candidate = expr.charAt(index);
         
         //Check if the token character is a letter or _
         if(candidate >= 'a' && candidate <= 'z' ||
            candidate >= 'A' && candidate <= 'Z' ||
-           candidate == '_') return 1;
+           candidate == '_') return 1+whitespace;
         
         return 0;
     }

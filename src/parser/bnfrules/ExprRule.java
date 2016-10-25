@@ -22,6 +22,7 @@ public class ExprRule extends BnfRule {
     public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
         int addition = 0;
         int subindex = 0;
+        int origIndex = index;
         
         BnfRule term = rules.get("term");
         BnfRule addop = rules.get("addop");
@@ -30,6 +31,8 @@ public class ExprRule extends BnfRule {
         //Skip leading whitespace
         if(!keepWhitespace)
             index = skipWhitespace(expr, index);
+        
+        int whitespace = index-origIndex;
         
         addition = term.validTokens(expr, index+subindex, rules);
         while(addition > 0)
@@ -45,7 +48,7 @@ public class ExprRule extends BnfRule {
                 addition = addsize + termsize;
         }
 
-        return subindex;
+        return subindex+(subindex>0?whitespace:0);
     }
     
 }

@@ -21,6 +21,7 @@ public class IdRule extends BnfRule {
     public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
         int subIndex = 0;
         int addition = 0;
+        int origIndex = index;
         
         BnfRule letter = rules.get("letter");
         BnfRule digit = rules.get("digit");
@@ -30,6 +31,8 @@ public class IdRule extends BnfRule {
         if(!keepWhitespace)
             index = skipWhitespace(expr, index);
         
+        int whitespace = index-origIndex;
+        
         addition = letter.validTokens(expr, index+subIndex, rules, true);
         while(addition > 0)
         {
@@ -38,7 +41,7 @@ public class IdRule extends BnfRule {
             addition = Math.max(letter.validTokens(expr, index+subIndex, rules, true),
                                 digit.validTokens(expr, index+subIndex, rules, true));
         }
-        return subIndex;
+        return subIndex+(subIndex>0?whitespace:0);
     }
     
 }

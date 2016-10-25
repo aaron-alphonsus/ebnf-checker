@@ -22,6 +22,7 @@ public class TermRule extends BnfRule {
     public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
         int addition = 0;
         int subindex = 0;
+        int origIndex = index;
         
         BnfRule factor = rules.get("factor");
         BnfRule mulop = rules.get("mulop");
@@ -32,6 +33,8 @@ public class TermRule extends BnfRule {
         if(!keepWhitespace)
             index = skipWhitespace(expr, index);
             
+        int whitespace = index-origIndex;
+        
         addition = factor.validTokens(expr, index+subindex, rules);
         while(addition > 0)
         {
@@ -46,7 +49,7 @@ public class TermRule extends BnfRule {
                 addition = mulsize + factorsize;
         }
 
-        return subindex;
+        return subindex+(subindex>0?whitespace:0);
     }
     
 }
