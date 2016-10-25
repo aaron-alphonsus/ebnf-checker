@@ -59,7 +59,7 @@ public abstract class BnfRule {
     */
     protected int skipWhitespace(String expr, int index)
     {
-        while(expr.charAt(index) == ' ' || expr.charAt(index) == '\t') index++;
+        while(index < expr.length() && expr.charAt(index) == ' ' || expr.charAt(index) == '\t') index++;
         return index;
     }
 }

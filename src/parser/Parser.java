@@ -106,14 +106,17 @@ public class Parser {
     {
         BnfChecker check = new BnfChecker();
         
+        check.addRule(new ExprRule());
+        check.addRule(new TermRule());
+        
         check.addRule(new IntegerRule());
+        check.addRule(new FloatRule());
         check.addRule(new IdRule());
         check.addRule(new LetterRule());
         check.addRule(new DigitRule());
         check.addRule(new AddOpRule());
         check.addRule(new MulOpRule());
-        check.addRule(new ExprRule());
-        check.addRule(new TermRule());
+        
         
         return check;
     }
