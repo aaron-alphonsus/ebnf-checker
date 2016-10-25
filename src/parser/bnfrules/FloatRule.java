@@ -9,7 +9,7 @@ public class FloatRule extends BnfRule {
         return "float";
     }
 
-    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
+    protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         
         int subIndex = 0;
         int addition = 0;
@@ -17,18 +17,14 @@ public class FloatRule extends BnfRule {
         BnfRule integer = rules.get("integer");	
         if (integer == null) return 0;    
 
-        //Skip leading whitespace
-        if (!keepWhitespace)        
-            index = skipWhitespace(expr, index);
-        
-        addition = integer.validTokens(expr, index+subIndex, rules, true);
+        addition = integer.charsUsed(expr, index+subIndex, rules, true);
         if (addition > 0) {
             subIndex += addition;
 			if(index+subIndex >= expr.length()) return 0;
             addition = ( (expr.charAt(index+subIndex) == '.')? 1 : 0 );
             if (addition > 0) {
                 subIndex += addition;
-                addition = integer.validTokens(expr, index+subIndex, rules, true);
+                addition = integer.charsUsed(expr, index+subIndex, rules, true);
 				subIndex += addition;
             }
         }

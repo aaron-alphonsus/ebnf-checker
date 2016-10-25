@@ -22,15 +22,8 @@ public class LetterRule extends BnfRule {
               N | O | P | Q | R | S | T | U | V | W | X | Y | Z |
               a | b | c | d | e | f | g | h | i | j | k | l | m |
               n | o | p | q | r | s | t | u | v | w | x | y | z | _ */
-    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
-        int origIndex = index;
-        
-        //Skip leading whitespace
-        if(!keepWhitespace)
-            index = skipWhitespace(expr, index);
-        
-        int whitespace = index-origIndex;
-        
+    protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
+      
         //If first token > 1 characters, not a digit
         if (index >= expr.length()) return 0;
         //Get the character
@@ -39,7 +32,7 @@ public class LetterRule extends BnfRule {
         //Check if the token character is a letter or _
         if(candidate >= 'a' && candidate <= 'z' ||
            candidate >= 'A' && candidate <= 'Z' ||
-           candidate == '_') return 1+whitespace;
+           candidate == '_') return 1;
         
         return 0;
     }

@@ -10,18 +10,11 @@ public class AddOpRule extends BnfRule {
     }
 
     //<addop> -> + | -
-    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
-        int whitespace=0;
-        int origIndex = index;
-        //Skip leading whitespace
-        if(!keepWhitespace)
-            index = skipWhitespace(expr, index);
-    
-        whitespace = index-origIndex;
-        
+    protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
+
         if(index >= expr.length()) return 0;
         if(expr.charAt(index) == '+' ||
-        	expr.charAt(index) == '-') return whitespace+1;
+        	expr.charAt(index) == '-') return 1;
     
         return 0;
     }

@@ -43,7 +43,7 @@ public class BnfChecker {
         for(String s : _rules.keySet())
         {
             //Get the number of characters used for this rule
-            charsUsed = _rules.get(s).validTokens(expr, 0, _rules);
+            charsUsed = _rules.get(s).charsUsed(expr, 0, _rules);
             
             //Update best match if necessary
             if(charsUsed > bestChars)

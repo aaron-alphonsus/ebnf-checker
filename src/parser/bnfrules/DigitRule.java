@@ -19,15 +19,7 @@ public class DigitRule extends BnfRule {
     }
 
     //<digit> -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
-        int whitespace=0;
-        int origIndex = index;
-        //Skip leading whitespace
-        if(!keepWhitespace)
-            index = skipWhitespace(expr, index);
-    
-        whitespace = index-origIndex;
-        
+    protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         //If first token > 1 characters, not a digit
         if (index >= expr.length()) return 0;
         
@@ -35,7 +27,7 @@ public class DigitRule extends BnfRule {
         char candidate = expr.charAt(index);
         
         //Check if the token character is between '0' and '9'
-        if(candidate >= '0' && candidate <= '9') return whitespace+1;
+        if(candidate >= '0' && candidate <= '9') return 1;
         return 0;
     }
     
