@@ -30,23 +30,49 @@ public abstract class BnfRule {
     * @return The number of characters that this rule can use, starting at index.
     *         0 if the rule can't be matched at all
     */
-    public abstract int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace);
-       
+    protected abstract int validTokens(String expr, int index, HashMap<String, BnfRule> rules);
+     
     /**
-    * Checks how many characters of the string, starting at index,
-    * can be used to match this rule. Defaults the keepWhitespace parameter
-    * to false
-    *
-    * @param expr The String expression to evaluate
-    * @param index The index of expr to start at, inclusive
-    * @param rules A hash of all available rules, hashed by their names
-    *
-    * @return The number of characters that this rule can use, starting at index.
-    *         0 if the rule can't be matched at all
-    */
-    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules)
+     * Convenience function to call charsUsed with the keepWhitespace param
+     * defaulted to false
+     * 
+     * @param expr The expression to evaluate
+     * @param index The index to start at
+     * @param rules The list of other rules to use
+     * @return The number of characters used for this rule; 0 if not valid with this rule
+     */
+    public int charsUsed(String expr, int index, HashMap<String, BnfRule> rules)
     {
-        return validTokens(expr, index, rules, false);
+        return charsUsed(expr, index, rules, false);
+    }
+
+     /**
+     * Function which optionally skips whitespace before calling the validTokens function
+     * to get the number of characters this rule can use in the input expression. If
+     * validTokens returns 0, then this function returns 0 regardless of the whitespace 
+     * skipped; however, if validTokens returns non-0, this this function adds whitespace
+     * skipped to that value before returning it
+     * 
+     * @param expr The expression to evaluate
+     * @param index The index to start at
+     * @param rules The list of other rules to use
+     * @param keepWhitespace Whether or not to avoid skipping whitespace before evaluating the rule
+     * @return The number of characters used for this rule, including whitespace; 0 if not valid with this rule
+     */
+    public int charsUsed(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace)
+    {
+        int origIndex = index;
+        int whitespace = 0;
+        
+        if(!keepWhitespace)
+        {
+            index = skipWhitespace(expr, index);
+            whitespace = index-origIndex;
+        }
+        
+        int used = validTokens(expr, index, rules);
+        
+        return used > 0?used+whitespace:used;
     }
     
     /**
@@ -59,7 +85,7 @@ public abstract class BnfRule {
     */
     protected int skipWhitespace(String expr, int index)
     {
-        while(expr.charAt(index) == ' ' || expr.charAt(index) == '\t') index++;
+        while(index < expr.length() && expr.charAt(index) == ' ' || expr.charAt(index) == '\t') index++;
         return index;
     }
 }

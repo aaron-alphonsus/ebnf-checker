@@ -18,13 +18,9 @@ public class MulOpRule extends BnfRule {
     }
 
     //<mulop> -> * | / | %
-    public int validTokens(String expr, int index, HashMap<String, BnfRule> rules, boolean keepWhitespace) {
+    protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
+        
         if(index >= expr.length()) return 0;
-        
-        //Skip leading whitespace
-        if(!keepWhitespace)
-            index = skipWhitespace(expr, index);
-        
         if(expr.charAt(index) == '*' ||
            expr.charAt(index) == '/' ||
            expr.charAt(index) == '%') return 1;

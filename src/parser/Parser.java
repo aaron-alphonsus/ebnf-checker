@@ -57,10 +57,10 @@ public class Parser {
             System.out.print("Enter Expression: ");
             
             //Read a line
-            input = cin.nextLine();
+            input = cin.nextLine().trim();
             
             //If empty string, exit
-            if(input.trim().length() == 0)
+            if(input.length() == 0)
                 return;
             
             //Check the expression
@@ -96,21 +96,27 @@ public class Parser {
     
    /**
     * Function to create the {@link BnfChecker} object
-    * and insert all of the {@link BnfRule}s to be used
+    * and insert all of the {@link bnfchecker.BnfRule}s to be used
     * to check inputs
     *
     * @return A {@link BnfChecker} object loaded with all
-    * of the {@link BnfRule}s to use
+    * of the {@link bnfchecker.BnfRule}s to use
     */
     public static BnfChecker setupChecker()
     {
         BnfChecker check = new BnfChecker();
         
-        check.addRule(new DigitRule());
+        check.addRule(new ExprRule());
+        check.addRule(new TermRule());
+        
+        check.addRule(new IntegerRule());
+        check.addRule(new FloatRule());
         check.addRule(new IdRule());
         check.addRule(new LetterRule());
-        check.addRule(new MulOpRule());
+        check.addRule(new DigitRule());
         check.addRule(new AddOpRule());
+        check.addRule(new MulOpRule());
+        
         
         return check;
     }

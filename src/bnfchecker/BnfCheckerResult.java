@@ -5,11 +5,11 @@ import java.util.ArrayList;
 /**
  * Object used by {@link BnfChecker} to return the following
  * information about an attempt to match a string to bnf rules
- * <lu>
+ * <ul>
  * <li> The name of the rule which matched best </li>
  * <li> The number of characters by that rule </li>
  * <li> An ArrayList of the tokens parsed from the input </li>
- * </lu>
+ * </ul>
  *
  * @author Andrew Stelter
  */
@@ -36,7 +36,7 @@ public class BnfCheckerResult {
     /**
     * Get the list of tokens contained
     *
-    * @return An ArrayList<String> object containing a list of tokens
+    * @return An ArrayList&lt;String&gt; object containing a list of tokens
     */
     public ArrayList<String> tokens()
     {
