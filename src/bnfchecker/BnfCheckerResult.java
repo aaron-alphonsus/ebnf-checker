@@ -1,3 +1,4 @@
+/* For package and program info, please run javadoc */
 package bnfchecker;
 
 import java.util.ArrayList;
