@@ -34,7 +34,7 @@ public class Parser {
     public static void main(String[] args) {
         //Set up input scanner
         Scanner cin = new Scanner( System.in );
-        String input;
+        String input, orig;
         
         
         //Flags for command line inputs
@@ -62,7 +62,8 @@ public class Parser {
             System.out.print("Enter Expression: ");
             
             //Read a line
-            input = cin.nextLine().trim();
+            orig = cin.nextLine();
+            input = orig.trim();
             
             //If empty string, exit
             if(input.length() == 0)
@@ -73,9 +74,9 @@ public class Parser {
 
             //See if all characters were used to complete a rule
             if(result.chars() == input.length())
-                System.out.println("\"" + input + "\" is a valid expression");
+                System.out.println("\"" + orig + "\" is a valid expression");
             else
-                System.out.println("\"" + input + "\" is not a valid expression");
+                System.out.println("\"" + orig + "\" is not a valid expression");
             
             //-t specified, output tokens
             if(tFlag)
@@ -92,9 +93,14 @@ public class Parser {
             //-b specified, output best matching rule
             if(bFlag)
             {
-                System.out.println("Best Match: " + result.name());
+
                 if(result.chars() != input.length())
+                {
+                    System.out.println("Best Match: " + result.name());
                     System.out.println(result.chars() + " characters used");
+                }
+                else
+                    System.out.println("Full Match: " + result.name());
             }
         }while(true);
     }

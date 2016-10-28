@@ -13,11 +13,22 @@ public abstract class BnfRule {
 
     private boolean _debugging = false;
 
+    /**
+    * Set the debug statements from rules
+    *
+    * @param debug Whether you want debug output or not
+    */
     public void setDebugging(boolean debug)
     {
         _debugging = debug;
     }
     
+    /**
+    * Output function which takes the debugging
+    * setting into account
+    *
+    * @param line The text to output if debug mode is on
+    */
     protected void debug(String line)
     {
         if(_debugging) System.out.println(name() + ": " + line);
@@ -77,7 +88,7 @@ public abstract class BnfRule {
         int origIndex = index;
         int whitespace = 0;
         
-        debug(name() + ": " + index);
+        debug(""+index);
         
         if(!keepWhitespace)
         {

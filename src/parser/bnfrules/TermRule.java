@@ -49,7 +49,7 @@ public class TermRule extends BnfRule {
             int mulsize=0, factorsize = 0;
             
             debug("Recurse to mulop");
-            mulsize = mulop.charsUsed(expr, index+subindex, rules, true);
+            mulsize = mulop.charsUsed(expr, index+subindex, rules);
             if(mulsize > 0)
             {
                 debug("Recurse to factor");

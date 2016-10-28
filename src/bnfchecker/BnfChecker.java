@@ -16,11 +16,6 @@ public class BnfChecker {
     private boolean _debug;
     
     /**
-    * Empty constructor
-    */
-    public BnfChecker(){}
-    
-    /**
     * Checks if a String expression matches any {@link BnfRule}
     * contained in this {@link BnfChecker}. If no rule matches, the
     * output will contain "No Rule" and 0 characters, along with
@@ -104,6 +99,11 @@ public class BnfChecker {
         return tokens;
     }
     
+    /**
+    * Set the debuggin mode for the loaded {@BnfRule}s
+    *
+    * @param debug Whether or not debugging should be on
+    */
     public void setDebugging(boolean debug)
     {
         _debug = debug;
