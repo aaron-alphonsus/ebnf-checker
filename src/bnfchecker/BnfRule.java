@@ -90,15 +90,20 @@ public abstract class BnfRule {
         
         debug(""+index);
         
+        //Optionally skip whitespace before checking the rest of the rule
         if(!keepWhitespace)
         {
             index = skipWhitespace(expr, index);
+            
+            //Calculate how much whitespace was skipped
             whitespace = index-origIndex;
             debug("Skipped " + whitespace + " whitespace");
         }
         
+        //Call the rest of the rule function
         int used = validTokens(expr, index, rules);
         
+        //If the rule returned non-0, then add the amount of whitespace before returning
         return used > 0?used+whitespace:used;
     }
     
@@ -112,6 +117,7 @@ public abstract class BnfRule {
     */
     protected int skipWhitespace(String expr, int index)
     {
+        //Walk forward as long as the current index is in the string and whitespace
         while(index < expr.length() && (expr.charAt(index) == ' ' || expr.charAt(index) == '\t')) index++;
         return index;
     }

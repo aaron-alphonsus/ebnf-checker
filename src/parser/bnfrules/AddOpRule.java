@@ -32,7 +32,11 @@ public class AddOpRule extends BnfRule {
     protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
 
         debug("Begin at " + index);
+        
+        //Make sure the index is in the string
         if(index >= expr.length()) return 0;
+        
+        //Check if the character is an add-level symbol
         if(expr.charAt(index) == '+' ||
         	expr.charAt(index) == '-')return 1;
     

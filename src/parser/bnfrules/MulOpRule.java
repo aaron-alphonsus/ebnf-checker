@@ -32,7 +32,11 @@ public class MulOpRule extends BnfRule {
     protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         
         debug("Begin at " + index);
+        
+        //If index not in string, 0
         if(index >= expr.length()) return 0;
+        
+        //Check the the character is a multiply-level symbol
         if(expr.charAt(index) == '*' ||
            expr.charAt(index) == '/' ||
            expr.charAt(index) == '%') return 1;

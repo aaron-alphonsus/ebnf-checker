@@ -34,24 +34,37 @@ public class ExprRule extends BnfRule {
         int subindex = 0;
         
         debug("Begin at " + index);
+        
         BnfRule term = rules.get("term");
         BnfRule addop = rules.get("addop");
+        
+        //Make sure the necessary recursion rules exist
         if(term == null || addop == null) return 0;
         
         debug("Recurse to term");
+        
+        //Check if the term rule can be done
         addition = term.charsUsed(expr, index+subindex, rules, true);
+        
+        //As long as the <addop> <term> pair is valid, look for it again
         while(addition > 0)
         {
+            //Add in the amount used by the previous rule(s)
             subindex += addition;
             int addsize=0, termsize = 0;
             
             debug("Recurse to addop");
+            //Check for an addop
             addsize = addop.charsUsed(expr, index+subindex, rules);
+            
+            //If there's an addop, check for a term
             if(addsize > 0)
             {
                 debug("Recurse to term");
                 termsize = term.charsUsed(expr, index+subindex+addsize, rules);
             }
+            
+            //if there's a term, then the <addop> <term> pair is valid
             if(termsize > 0)
                 addition = addsize + termsize;
             else addition = 0;
