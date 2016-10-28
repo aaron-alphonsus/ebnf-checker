@@ -1,6 +1,7 @@
 build/*
 nbproject/*
 test/*
+src/html
 build.xml
 *.class
 /dist/

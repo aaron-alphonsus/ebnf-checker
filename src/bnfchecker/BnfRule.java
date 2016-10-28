@@ -1,3 +1,4 @@
+/* For package and program info, please run javadoc */
 package bnfchecker;
 
 import java.util.HashMap;
@@ -25,7 +26,6 @@ public abstract class BnfRule {
     * @param expr The String expression to evaluate
     * @param index The index of expr to start at, inclusive
     * @param rules A hash of all available rules, hashed by their names
-    * @param keepWhitespace Whether or not the rule should skip leading whitespace
     *
     * @return The number of characters that this rule can use, starting at index.
     *         0 if the rule can't be matched at all

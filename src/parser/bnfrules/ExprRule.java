@@ -1,23 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* For package and program info, please run javadoc */
 package parser.bnfrules;
 
 import bnfchecker.BnfRule;
 import java.util.HashMap;
 
 /**
- *
- * @author 7280681
- */
+* {@link bnfchecker.BnfRule} for checking the Expr rule defined as &lt;expr&gt; -&gt; &lt;term&gt;   { &lt;addop&gt; &lt;term&gt; }
+*/
 public class ExprRule extends BnfRule {
     
+    /**
+    *   Gets the name of the rule -- 'expr'
+    *
+    *   @return The string 'expr'
+    */
     public String name() {
         return "expr";
     }
 
+    /**
+    * Parses an input expression, starting at an index, to see if the next few
+    * characters fit the rule  &lt;expr&gt; -&gt; &lt;term&gt;   { &lt;addop&gt; &lt;term&gt; }
+    *
+    * @param expr The string expression to parse
+    * @param index The index to start looking at
+    * @param rules The list of other {@link bnfchecker.BnfRule}s in the grammer
+    *
+    * @return int - The number of characters used to complete the rule
+    */
     //<expr> -> <term> { <addop> <term> }
     protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         int addition = 0;
