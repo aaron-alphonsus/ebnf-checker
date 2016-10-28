@@ -37,12 +37,16 @@ public class IntegerRule extends BnfRule {
         BnfRule digit = rules.get("digit");	
         if (digit == null) return 0;    
 
+        // Look for the first digit
         addition = digit.charsUsed(expr, index+subIndex, rules, true);
+        // While we keep finding a digit
         while(addition > 0)
         {
             subIndex += addition;
             addition = digit.charsUsed(expr, index+subIndex, rules, true);
         }
+        
+        // subIndex stores the number of characters used by the rule
         return subIndex;
     }
     

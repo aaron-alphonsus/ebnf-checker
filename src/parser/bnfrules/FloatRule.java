@@ -38,14 +38,23 @@ public class FloatRule extends BnfRule {
         BnfRule integer = rules.get("integer");	
         if (integer == null) return 0;    
 
+        // Gets initial integer, stores value in addition
         addition = integer.charsUsed(expr, index+subIndex, rules, true);
+        
+        // If an integer was found
         if (addition > 0) {
+            
+            // If we have stepped off the expr array, return 0
             subIndex += addition;
 			if(index+subIndex >= expr.length()) return 0;
+            
+            // Look for the decimal point immediately after the first integer
             addition = ( (expr.charAt(index+subIndex) == '.')? 1 : 0 );
             if (addition > 0) {
                 subIndex += addition;
+                // Look for the integer after the decimal point
                 addition = integer.charsUsed(expr, index+subIndex, rules, true);
+		        // If there was an integer, add the index to be returned
 				if (addition > 0)
 					subIndex += addition;
 				else

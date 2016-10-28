@@ -49,20 +49,31 @@ public class FactorRule extends BnfRule {
         if(integer == null || floatrule == null || id == null || 
             exprrule == null || factor == null) return 0;
         
+        // Start searching for each element. Store largest number of characters 
+        // that match in each ind variable
+        
+        // Validating <integer>
         debug("Recurse to integer");
-        indInteger = integer.charsUsed(expr, index, rules, true);
+        indInteger = integer.charsUsed(expr, index, rules);
         
+        // Validating <float>
         debug("Recurse to float");
-        indFloat = floatrule.charsUsed(expr, index, rules, true);
+        indFloat = floatrule.charsUsed(expr, index, rules);
         
+        // Validating <id>
         debug("Recurse to id");
-        indId = id.charsUsed(expr, index, rules, true);
+        indId = id.charsUsed(expr, index, rules);
         
+        // Validating (<expr>). 
         if(index < expr.length()) {
+            // Searches for a '(' first
             if (expr.charAt(index) == '(') {
                 debug("Recurse to expr");
+                // Then, looks for an expr
                 indExpr = exprrule.charsUsed(expr, index+1, rules);
+                // If an expr was found
                 if (indExpr > 0) {
+                    // skips whitespace and looks for a ')'
                     newInd = skipWhitespace(expr, index+indExpr+1);
                     if (newInd < expr.length() && 
                         expr.charAt(newInd) == ')')
@@ -73,13 +84,17 @@ public class FactorRule extends BnfRule {
             }
         }   
         
+        // Validating -<factor>. 
+        // Searches for a '-' first
         if (index < expr.length() && expr.charAt(index) == '-') {
             debug("Recurse to factor");
-            indFactor = factor.charsUsed(expr, index+1, rules, true);
+            // Then, calls factor on characters following the '-'
+            indFactor = factor.charsUsed(expr, index+1, rules, false);
             if (indFactor > 0)
                 indFactor += 1;
         }
         
+        // Finds the max of all five lengths
         return Math.max(Math.max(indInteger, indFloat), 
             Math.max(indId, 
                 Math.max(indExpr, indFactor)));
