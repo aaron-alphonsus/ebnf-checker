@@ -13,6 +13,7 @@ import java.util.StringTokenizer;
  */
 public class BnfChecker {
     private HashMap<String, BnfRule> _rules = new HashMap<String, BnfRule>();
+    private boolean _debug;
     
     /**
     * Empty constructor
@@ -101,5 +102,12 @@ public class BnfChecker {
         }
         
         return tokens;
+    }
+    
+    public void setDebugging(boolean debug)
+    {
+        _debug = debug;
+        for(String k : _rules.keySet())
+            _rules.get(k).setDebugging(debug);
     }
 }

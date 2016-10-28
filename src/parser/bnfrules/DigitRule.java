@@ -8,7 +8,7 @@ import java.util.HashMap;
 * {@link bnfchecker.BnfRule} for checking the Digit rule defined as &lt;digit&gt; -&gt; 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 */
 public class DigitRule extends BnfRule {
-    
+     
     /**
     *   Gets the name of the rule -- 'digit'
     *
@@ -30,6 +30,8 @@ public class DigitRule extends BnfRule {
     */
     //<digit> -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
     protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
+        debug("Begin at " + index);
+        
         //If first token > 1 characters, not a digit
         if (index >= expr.length()) return 0;
         

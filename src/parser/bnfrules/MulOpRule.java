@@ -7,6 +7,7 @@ import java.util.HashMap;
 * {@link bnfchecker.BnfRule} for checking the MulOp rule defined as &lt;mulop&gt;   -&gt; * | / | %
 */
 public class MulOpRule extends BnfRule {
+
     
     /**
     *   Gets the name of the rule -- 'mulop'
@@ -30,6 +31,7 @@ public class MulOpRule extends BnfRule {
     //<mulop> -> * | / | %
     protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         
+        debug("Begin at " + index);
         if(index >= expr.length()) return 0;
         if(expr.charAt(index) == '*' ||
            expr.charAt(index) == '/' ||

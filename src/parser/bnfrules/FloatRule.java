@@ -8,6 +8,7 @@ import java.util.HashMap;
 * {@link bnfchecker.BnfRule} for checking the Float rule defined as &lt;float&gt; -&gt; &lt;integer&gt; . &lt;integer&gt;
 */
 public class FloatRule extends BnfRule {
+
     
     /**
     *   Gets the name of the rule -- 'float'
@@ -29,10 +30,11 @@ public class FloatRule extends BnfRule {
     * @return int - The number of characters used to complete the rule
     */
     protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
-        
+
         int subIndex = 0;
         int addition = 0;
         
+        debug("Begin at " + index);
         BnfRule integer = rules.get("integer");	
         if (integer == null) return 0;    
 

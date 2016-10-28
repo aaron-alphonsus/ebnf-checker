@@ -8,7 +8,7 @@ import java.util.HashMap;
 * {@link bnfchecker.BnfRule} for checking the Expr rule defined as &lt;expr&gt; -&gt; &lt;term&gt;   { &lt;addop&gt; &lt;term&gt; }
 */
 public class ExprRule extends BnfRule {
-    
+
     /**
     *   Gets the name of the rule -- 'expr'
     *
@@ -33,22 +33,28 @@ public class ExprRule extends BnfRule {
         int addition = 0;
         int subindex = 0;
         
+        debug("Begin at " + index);
         BnfRule term = rules.get("term");
         BnfRule addop = rules.get("addop");
         if(term == null || addop == null) return 0;
         
+        debug("Recurse to term");
         addition = term.charsUsed(expr, index+subindex, rules);
         while(addition > 0)
         {
             subindex += addition;
             int addsize=0, termsize = 0;
-            addsize = addop.charsUsed(expr, index+subindex, rules, true);
+            
+            debug("Recurse to addop");
+            addsize = addop.charsUsed(expr, index+subindex, rules);
             if(addsize > 0)
             {
+                debug("Recurse to term");
                 termsize = term.charsUsed(expr, index+subindex+addsize, rules);
             }
             if(termsize > 0)
                 addition = addsize + termsize;
+            else addition = 0;
         }
 
         return subindex;

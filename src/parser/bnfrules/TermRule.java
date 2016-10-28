@@ -8,7 +8,7 @@ import java.util.HashMap;
 * {@link bnfchecker.BnfRule} for checking the Term rule defined as &lt;term&gt; -&gt; &lt;factor&gt; { &lt;mulop&gt; &lt;factor&gt; }
 */
 public class TermRule extends BnfRule {
-    
+
     /**
     *   Gets the name of the rule -- 'term'
     *
@@ -33,23 +33,31 @@ public class TermRule extends BnfRule {
         int addition = 0;
         int subindex = 0;
         
+        debug("Begin at " + index);
         BnfRule factor = rules.get("factor");
         BnfRule mulop = rules.get("mulop");
         
+        if(factor == null) System.out.println("Null factor");
+        if(mulop == null) System.out.println("Null mulop");
         if(factor == null || mulop == null) return 0;
         
+        debug("Recurse to factor");
         addition = factor.charsUsed(expr, index+subindex, rules);
         while(addition > 0)
         {
             subindex += addition;
             int mulsize=0, factorsize = 0;
+            
+            debug("Recurse to mulop");
             mulsize = mulop.charsUsed(expr, index+subindex, rules, true);
             if(mulsize > 0)
             {
+                debug("Recurse to factor");
                 factorsize = factor.charsUsed(expr, index+subindex+mulsize, rules);
             }
             if(factorsize > 0)
                 addition = mulsize + factorsize;
+            else addition = 0;
         }
 
         return subindex;
