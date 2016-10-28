@@ -77,7 +77,7 @@ public abstract class BnfRule {
         int origIndex = index;
         int whitespace = 0;
         
-        System.out.println(name() + ": " + index);
+        debug(name() + ": " + index);
         
         if(!keepWhitespace)
         {
