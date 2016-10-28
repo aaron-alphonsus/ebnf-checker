@@ -49,6 +49,7 @@ public class ExprRule extends BnfRule {
             }
             if(termsize > 0)
                 addition = addsize + termsize;
+            else addition = 0;
         }
 
         return subindex;

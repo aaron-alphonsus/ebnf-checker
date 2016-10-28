@@ -50,6 +50,7 @@ public class TermRule extends BnfRule {
             }
             if(factorsize > 0)
                 addition = mulsize + factorsize;
+            else addition = 0;
         }
 
         return subindex;
