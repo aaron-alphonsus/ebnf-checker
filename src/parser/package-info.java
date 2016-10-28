@@ -28,12 +28,36 @@
  * </pre>
  * Usage:
  * <pre>
- * ./Parser.Parser [-t][-b]
+ * ./Parser.Parser [-t][-b][-d]
  * -t - Output tokens after processing an expression
  * -b - List the best matching EBNF rule, and the number of characters matched (if not all)
+ * -d - Debuggin: Give a very verbose output of how the recursion goes
  * </pre>
  * Modifications and Development Timeline: 
+ * <pre>
+ * Date     Description
+ * -----    ---------------------------------
+ *  7/10    Set up framework and enough rules for proof of concept
+ *  9/10    Switched from using tokens to just using the input string
+ * 11/10    Removed whitespace before some rules
+ * 14/10    Fixed program exit conditions
+ * 17/10    Set up token outputting
+ * 21/10    Added expr and term rules
+ * 23/10    Added addop rule
+ *          Made skipWhitespace a method of {@link bnfchecker.BnfRule}
+ * 24/10    Completed integer rule
+ *          Fixed javadoc comments for netbeans
+ *          Added float - buggy
+ *          Fixed float
+ *          Switched to charsUsed method in {@link bnfchecker.BnfRule} for all whitespace skipping
+ *          Fixed a bug in float
+ * 25/10    Commented the rules
+ * 27/10    Added factor rule
+ *          Removed infinite loops
+ *          Finished getting all rules added
+ *          Fixed all remaining bugs
  *
+ * </pre>
  * @author Andrew Stelter
  * @author Aaron Alphonsus
  */

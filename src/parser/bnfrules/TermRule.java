@@ -37,24 +37,33 @@ public class TermRule extends BnfRule {
         BnfRule factor = rules.get("factor");
         BnfRule mulop = rules.get("mulop");
         
-        if(factor == null) System.out.println("Null factor");
-        if(mulop == null) System.out.println("Null mulop");
+        //Make sure the necessary recursion rules exist
         if(factor == null || mulop == null) return 0;
         
         debug("Recurse to factor");
+        
+        //Check for a factor
         addition = factor.charsUsed(expr, index+subindex, rules, true);
+        
+        //Continue checking for <mulop> <factor> pairs
         while(addition > 0)
         {
             subindex += addition;
             int mulsize=0, factorsize = 0;
             
             debug("Recurse to mulop");
+            
+            //Check for a mulop
             mulsize = mulop.charsUsed(expr, index+subindex, rules);
+            
+            //If there's a mulop, check for a factor
             if(mulsize > 0)
             {
                 debug("Recurse to factor");
                 factorsize = factor.charsUsed(expr, index+subindex+mulsize, rules);
             }
+            
+            //If there's a factor, the <mulop> <factor> pair is valid
             if(factorsize > 0)
                 addition = mulsize + factorsize;
             else addition = 0;

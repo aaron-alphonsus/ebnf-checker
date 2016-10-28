@@ -100,7 +100,7 @@ public class BnfChecker {
     }
     
     /**
-    * Set the debuggin mode for the loaded {@BnfRule}s
+    * Set the debugging mode for the loaded {@link BnfRule}s
     *
     * @param debug Whether or not debugging should be on
     */

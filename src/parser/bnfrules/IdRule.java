@@ -33,15 +33,22 @@ public class IdRule extends BnfRule {
         int addition = 0;
         
         debug("Begin at " + index);
+        
         BnfRule letter = rules.get("letter");
         BnfRule digit = rules.get("digit");
+        
+        //Make sure the necessary recursion rules exist
         if(letter == null || digit == null) return 0;
         
+        //Check for a letter
         addition = letter.charsUsed(expr, index+subIndex, rules, true);
+        
+        //As long as more letters or digits are found, keep looking
         while(addition > 0)
         {
             subIndex += addition;
             
+            //Check for either a letter or digit
             addition = Math.max(letter.charsUsed(expr, index+subIndex, rules, true),
                                 digit.charsUsed(expr, index+subIndex, rules, true));
         }

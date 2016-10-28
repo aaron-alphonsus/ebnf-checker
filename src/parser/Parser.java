@@ -23,7 +23,7 @@ public class Parser {
 
     /**
      * Program entry point. Checks command line arguments for
-     * '-t' and '-b', then goes into an infinite loop of the form
+     * '-t', '-b', and '-d', then goes into an infinite loop of the form
      * "read, evaluate, output" until the user inputs a blank string.
      * For each inputted string is passed to the BnfChecker which has been
      * set up. The BnfChecker returns how many characters were successfully
@@ -52,6 +52,7 @@ public class Parser {
             if(s.equals("-d")) dFlag = true;
         }
 
+        //Set debugging based on -d flag
         checker.setDebugging(dFlag);
         
         //Loop of read, evaluate, output until
@@ -94,6 +95,7 @@ public class Parser {
                 System.out.print("Tokens: ");
                 for(String s : result.tokens())
                 {
+                    //Output all non-space tokens
                     if(!s.equals(" "))
                         System.out.print("\"" + s + "\""  + " ");
                 }
