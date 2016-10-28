@@ -50,13 +50,13 @@ public class FactorRule extends BnfRule {
             exprrule == null || factor == null) return 0;
         
         debug("Recurse to integer");
-        indInteger = integer.charsUsed(expr, index, rules);
+        indInteger = integer.charsUsed(expr, index, rules, true);
         
         debug("Recurse to float");
-        indFloat = floatrule.charsUsed(expr, index, rules);
+        indFloat = floatrule.charsUsed(expr, index, rules, true);
         
         debug("Recurse to id");
-        indId = id.charsUsed(expr, index, rules);
+        indId = id.charsUsed(expr, index, rules, true);
         
         if(index < expr.length()) {
             if (expr.charAt(index) == '(') {
@@ -75,7 +75,7 @@ public class FactorRule extends BnfRule {
         
         if (index < expr.length() && expr.charAt(index) == '-') {
             debug("Recurse to factor");
-            indFactor = factor.charsUsed(expr, index+1, rules, false);
+            indFactor = factor.charsUsed(expr, index+1, rules, true);
             if (indFactor > 0)
                 indFactor += 1;
         }

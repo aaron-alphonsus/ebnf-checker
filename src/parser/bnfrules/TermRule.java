@@ -42,7 +42,7 @@ public class TermRule extends BnfRule {
         if(factor == null || mulop == null) return 0;
         
         debug("Recurse to factor");
-        addition = factor.charsUsed(expr, index+subindex, rules);
+        addition = factor.charsUsed(expr, index+subindex, rules, true);
         while(addition > 0)
         {
             subindex += addition;

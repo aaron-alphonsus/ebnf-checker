@@ -39,7 +39,7 @@ public class ExprRule extends BnfRule {
         if(term == null || addop == null) return 0;
         
         debug("Recurse to term");
-        addition = term.charsUsed(expr, index+subindex, rules);
+        addition = term.charsUsed(expr, index+subindex, rules, true);
         while(addition > 0)
         {
             subindex += addition;

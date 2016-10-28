@@ -58,6 +58,7 @@ public class Parser {
         //an empty string is inputted
         do
         {
+            System.out.println(new String(new char[30]).replace('\0', '-'));
             //Prompt user
             System.out.print("Enter Expression: ");
             
@@ -65,18 +66,27 @@ public class Parser {
             orig = cin.nextLine();
             input = orig.trim();
             
+            System.out.println("");
+            
             //If empty string, exit
             if(input.length() == 0)
                 return;
             
             //Check the expression
             BnfCheckerResult result = checker.checkExpression(input);
+     
+            //-b specified, output best matching rule
+            if(bFlag)
+            {
 
-            //See if all characters were used to complete a rule
-            if(result.chars() == input.length())
-                System.out.println("\"" + orig + "\" is a valid expression");
-            else
-                System.out.println("\"" + orig + "\" is not a valid expression");
+                if(result.chars() != input.length())
+                {
+                    System.out.println("Best Match: " + result.name());
+                    System.out.println(result.chars() + " characters used");
+                }
+                else
+                    System.out.println("Full Match: " + result.name());
+            }
             
             //-t specified, output tokens
             if(tFlag)
@@ -90,18 +100,13 @@ public class Parser {
                 System.out.print("\n");
             }
             
-            //-b specified, output best matching rule
-            if(bFlag)
-            {
+            //See if all characters were used to complete a rule
+            if(result.chars() == input.length())
+                System.out.println("\"" + orig + "\" is a valid expression");
+            else
+                System.out.println("\"" + orig + "\" is not a valid expression");
 
-                if(result.chars() != input.length())
-                {
-                    System.out.println("Best Match: " + result.name());
-                    System.out.println(result.chars() + " characters used");
-                }
-                else
-                    System.out.println("Full Match: " + result.name());
-            }
+
         }while(true);
     }
     
