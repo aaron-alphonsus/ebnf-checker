@@ -108,7 +108,7 @@ public class Parser {
         
         check.addRule(new ExprRule());
         check.addRule(new TermRule());
-        
+        check.addRule(new FactorRule());
         check.addRule(new IntegerRule());
         check.addRule(new FloatRule());
         check.addRule(new IdRule());

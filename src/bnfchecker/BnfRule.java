@@ -64,6 +64,8 @@ public abstract class BnfRule {
         int origIndex = index;
         int whitespace = 0;
         
+        System.out.println(name() + ": " + index);
+        
         if(!keepWhitespace)
         {
             index = skipWhitespace(expr, index);
