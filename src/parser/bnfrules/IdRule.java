@@ -8,7 +8,7 @@ import java.util.HashMap;
 * {@link bnfchecker.BnfRule} for checking the Id rule defined as &lt;id&gt; -&gt; &lt;letter&gt; { &lt;letter&gt; | &lt;digit&gt; }
 */
 public class IdRule extends BnfRule {
-    
+
     /**
     *   Gets the name of the rule -- 'id'
     *
@@ -32,6 +32,7 @@ public class IdRule extends BnfRule {
         int subIndex = 0;
         int addition = 0;
         
+        debug("Begin at " + index);
         BnfRule letter = rules.get("letter");
         BnfRule digit = rules.get("digit");
         if(letter == null || digit == null) return 0;

@@ -20,6 +20,7 @@ public class FactorRule extends BnfRule {
 
     protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
         
+        debug("Begin at " + index);
         int indInteger = 0;
         int indFloat = 0;
         int indId = 0;
@@ -35,13 +36,19 @@ public class FactorRule extends BnfRule {
         if(integer == null || floatrule == null || id == null || 
             exprrule == null || factor == null) return 0;
         
+        debug("Recurse to integer");
         indInteger = integer.charsUsed(expr, index, rules);
+        
+        debug("Recurse to float");
         indFloat = floatrule.charsUsed(expr, index, rules);
+        
+        debug("Recurse to id");
         indId = id.charsUsed(expr, index, rules);
         
         if(index < expr.length()) {
             if (expr.charAt(index) == '(') {
-                indExpr = integer.charsUsed(expr, index+1, rules);
+                debug("Recurse to expr");
+                indExpr = exprrule.charsUsed(expr, index+1, rules);
                 if (indExpr > 0) {
                     newInd = skipWhitespace(expr, index+indExpr+1);
                     if (newInd < expr.length() && 
@@ -49,18 +56,20 @@ public class FactorRule extends BnfRule {
                         indExpr = newInd - index + 1;
                     else
                         indExpr = 0;
+                }
             }
         }   
         
         if (index < expr.length() && expr.charAt(index) == '-') {
-            indFactor = integer.charsUsed(expr, index+1, rules, false);
+            debug("Recurse to factor");
+            indFactor = factor.charsUsed(expr, index+1, rules, false);
             if (indFactor > 0)
                 indFactor += 1;
         }
         
         return Math.max(Math.max(indInteger, indFloat), 
             Math.max(indId, 
-                Math.max(indExpr, IndFactor)));
+                Math.max(indExpr, indFactor)));
     }
     
 }

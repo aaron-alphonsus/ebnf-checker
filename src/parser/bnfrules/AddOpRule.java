@@ -31,9 +31,10 @@ public class AddOpRule extends BnfRule {
     //<addop> -> + | -
     protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
 
+        debug("Begin at " + index);
         if(index >= expr.length()) return 0;
         if(expr.charAt(index) == '+' ||
-        	expr.charAt(index) == '-') return 1;
+        	expr.charAt(index) == '-')return 1;
     
         return 0;
     }

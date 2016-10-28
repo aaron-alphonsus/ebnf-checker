@@ -8,7 +8,7 @@ import java.util.HashMap;
 * {@link bnfchecker.BnfRule} for checking the Integer rule defined as &lt;integer&gt; -&gt; &lt;digit&gt; { &lt;digit&gt; }
 */
 public class IntegerRule extends BnfRule {
-    
+
     /**
     *   Gets the name of the rule -- 'integer'
     *
@@ -33,6 +33,7 @@ public class IntegerRule extends BnfRule {
         int subIndex = 0;
         int addition = 0;
         
+        debug("Begin at " + index);
         BnfRule digit = rules.get("digit");	
         if (digit == null) return 0;    
 

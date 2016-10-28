@@ -9,6 +9,7 @@ import java.util.HashMap;
 */
 public class LetterRule extends BnfRule {
     
+
     /**
     *   Gets the name of the rule -- 'letter'
     *
@@ -34,6 +35,7 @@ public class LetterRule extends BnfRule {
                   n | o | p | q | r | s | t | u | v | w | x | y | z | _ */
     protected int validTokens(String expr, int index, HashMap<String, BnfRule> rules) {
       
+        debug("Begin at " + index);
         //If first token > 1 characters, not a digit
         if (index >= expr.length()) return 0;
         //Get the character

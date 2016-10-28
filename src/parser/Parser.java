@@ -36,18 +36,23 @@ public class Parser {
         Scanner cin = new Scanner( System.in );
         String input;
         
-        //Build the Bnf rule checker
-        BnfChecker checker = setupChecker();
         
         //Flags for command line inputs
-        boolean tFlag = false, bFlag = false;
+        boolean tFlag = false, bFlag = false, dFlag = false;
+        
+                
+        //Build the Bnf rule checker
+        BnfChecker checker = setupChecker();
         
         //Check all arguments to be 
         for(String s : args)
         {
             if(s.equals("-b")) bFlag = true;
             if(s.equals("-t")) tFlag = true;
+            if(s.equals("-d")) dFlag = true;
         }
+
+        checker.setDebugging(dFlag);
         
         //Loop of read, evaluate, output until
         //an empty string is inputted
@@ -108,7 +113,7 @@ public class Parser {
         
         check.addRule(new ExprRule());
         check.addRule(new TermRule());
-        
+        check.addRule(new FactorRule());
         check.addRule(new IntegerRule());
         check.addRule(new FloatRule());
         check.addRule(new IdRule());

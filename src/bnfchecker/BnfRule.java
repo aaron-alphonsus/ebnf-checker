@@ -10,6 +10,19 @@ import java.util.HashMap;
  * @author Andrew Stelter
  */
 public abstract class BnfRule {
+
+    private boolean _debugging = false;
+
+    public void setDebugging(boolean debug)
+    {
+        _debugging = debug;
+    }
+    
+    protected void debug(String line)
+    {
+        if(_debugging) System.out.println(name() + ": " + line);
+    }
+
     /**
     * Return the name of the rule to be used by other
     * rules to recurse to this rule
@@ -68,6 +81,7 @@ public abstract class BnfRule {
         {
             index = skipWhitespace(expr, index);
             whitespace = index-origIndex;
+            debug("Skipped " + whitespace + " whitespace");
         }
         
         int used = validTokens(expr, index, rules);
@@ -85,7 +99,7 @@ public abstract class BnfRule {
     */
     protected int skipWhitespace(String expr, int index)
     {
-        while(index < expr.length() && expr.charAt(index) == ' ' || expr.charAt(index) == '\t') index++;
+        while(index < expr.length() && (expr.charAt(index) == ' ' || expr.charAt(index) == '\t')) index++;
         return index;
     }
 }
